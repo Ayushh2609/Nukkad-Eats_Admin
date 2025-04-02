@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">NukkadEatsAdmin</string>
+    <string name="login_string">Login to your\nAdmin Dashboard</string>
+</resources>
