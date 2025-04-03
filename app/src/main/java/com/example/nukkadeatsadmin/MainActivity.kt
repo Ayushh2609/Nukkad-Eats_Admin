@@ -1,5 +1,6 @@
 package com.example.nukkadeatsadmin
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.addMenu.setOnClickListener{
+            startActivity(Intent(this , AddMenuActivity::class.java))
 
         }
 
