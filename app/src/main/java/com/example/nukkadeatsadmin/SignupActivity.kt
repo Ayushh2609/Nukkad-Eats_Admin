@@ -2,6 +2,7 @@ package com.example.nukkadeatsadmin
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -32,6 +33,18 @@ class SignupActivity : AppCompatActivity() {
             val intent = Intent(this , MainActivity::class.java)
             startActivity(intent)
         }
+
+
+        val statesList = arrayOf("Uttarakhand" , "UttarPradesh" , "Bihar")
+        val adapter = ArrayAdapter(this , android.R.layout.simple_list_item_1 , statesList)
+
+
+        binding.autoCompleteTextView.setAdapter(adapter)
+
+        binding.autoCompleteTextView.setOnClickListener {
+            binding.autoCompleteTextView.showDropDown()
+        }
+
 
     }
 }
