@@ -26,9 +26,9 @@ class PendingOrderActivity : AppCompatActivity() {
 
         val customerList = arrayListOf("Ayush" , "Anchal" , "Abhijeet" , "Munni")
         val quantityList = arrayListOf("3" , "4" , "1" , "9")
+        val foodImage = arrayListOf(R.drawable.burger , R.drawable.pizza , R.drawable.burger , R.drawable.sydney)
 
-
-        val adapter = PendingItemAdapter(customerList , quantityList)
+        val adapter = PendingItemAdapter(customerList , quantityList , foodImage)
         binding.pendingRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.pendingRecyclerView.adapter = adapter
         

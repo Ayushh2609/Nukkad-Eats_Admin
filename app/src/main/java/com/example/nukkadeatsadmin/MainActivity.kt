@@ -57,5 +57,10 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        binding.pendingOrders.setOnClickListener{
+            startActivity(Intent(this , PendingOrderActivity::class.java))
+        }
+
+
     }
 }

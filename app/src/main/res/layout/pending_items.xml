@@ -22,8 +22,8 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/foodItemImage"
 
-                android:id="@+id/menuItemImage"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_margin="16dp"
@@ -87,7 +87,7 @@
                 android:orientation="vertical">
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/addToCart"
+                    android:id="@+id/acceptBtn"
 
                     android:layout_width="80dp"
                     android:layout_height="35dp"
