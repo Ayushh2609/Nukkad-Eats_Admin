@@ -19,6 +19,8 @@ class OutForDeliveryAdapter(private val customerNameList : ArrayList<String> , p
         holder.bind(position)
     }
     override fun getItemCount(): Int = customerNameList.size
+
+
     inner class ViewHolder(private val binding : DeliveryItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
             binding.apply {
