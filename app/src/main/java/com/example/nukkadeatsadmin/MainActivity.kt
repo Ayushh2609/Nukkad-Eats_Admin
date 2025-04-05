@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.addAllItem.setOnClickListener{
-
+            startActivity(Intent(this , AllItemMenuActivity::class.java))
         }
 
         binding.outForDelivery.setOnClickListener{

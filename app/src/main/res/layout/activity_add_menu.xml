@@ -1,7 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddMenuActivity"/>
+    tools:context=".AddMenuActivity">
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/yeon_sung"
+        android:text="Add Menu"
+        android:textColor="#FF0000"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="@+id/backButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.391"
+        app:layout_constraintStart_toEndOf="@+id/backButton"
+        app:layout_constraintTop_toTopOf="@+id/backButton"
+        app:layout_constraintVertical_bias="0.545" />
+
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
+        android:padding="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back_button" />
+
+    <TextView
+        android:id="@+id/nameTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/yeon_sung"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="24dp"
+        android:text="Food Name"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <EditText
+        android:id="@+id/itemName"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:padding="5dp"
+        android:background="@drawable/whitebutton"
+        android:elevation="5dp"
+        android:ems="10"
+        android:textSize="20sp"
+        android:fontFamily="@font/yeon_sung"
+        android:inputType="text"
+        android:paddingLeft="8dp"
+        android:hint="Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameTxt" />
+
+    <TextView
+        android:id="@+id/priceTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/yeon_sung"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Food Price"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemName" />
+
+    <EditText
+        android:id="@+id/itemPrice"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/whitebutton"
+        android:elevation="5dp"
+        android:ems="10"
+        android:textSize="20dp"
+        android:padding="5dp"
+        android:fontFamily="@font/yeon_sung"
+        android:inputType="text"
+        android:paddingLeft="8dp"
+        android:hint="Name"
+        app:layout_constraintEnd_toEndOf="@+id/itemName"
+        app:layout_constraintStart_toStartOf="@+id/itemName"
+        app:layout_constraintTop_toBottomOf="@+id/priceTxt" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/yeon_sung"
+        android:text="Add Image"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemPrice" />
+
+    <FrameLayout
+        android:id="@+id/addImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/whitebutton"
+        android:elevation="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/itemPrice"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/itemPrice"
+        app:layout_constraintTop_toBottomOf="@+id/textView10">
+
+        <ImageView
+            android:id="@+id/selectedImage"
+            android:layout_width="175dp"
+            android:layout_height="117dp"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:elevation="5dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toEndOf="@+id/itemPrice"
+            app:layout_constraintStart_toStartOf="@+id/itemPrice"
+            app:layout_constraintTop_toBottomOf="@+id/itemPrice"
+            app:srcCompat="@drawable/add_image_image" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/yeon_sung"
+        android:text="Short Description"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addImage" />
+
+    <EditText
+        android:id="@+id/itemDescription"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/whitebutton"
+        android:elevation="5dp"
+        android:ems="10"
+        android:gravity="top|start"
+        android:padding="5dp"
+        android:minLines="4"
+        android:fontFamily="@font/yeon_sung"
+        android:hint="Write about the dish..."
+        android:inputType="textMultiLine"
+        android:paddingLeft="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/asfscs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/yeon_sung"
+        android:text="Ingredient Details"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemDescription" />
+
+    <EditText
+        android:id="@+id/itemIngredients"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/whitebutton"
+        android:elevation="5dp"
+        android:ems="10"
+        android:padding="5dp"
+        android:layout_marginLeft="16dp"
+        android:minLines="4"
+        android:gravity="top|start"
+        android:layout_marginRight="16dp"
+        android:fontFamily="@font/yeon_sung"
+        android:hint="Ingredients used in it..."
+        android:inputType="textMultiLine"
+        android:paddingLeft="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/asfscs" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/AddItemBtn"
+        android:layout_width="157dp"
+        android:layout_height="57dp"
+        android:text="Add Item"
+        android:textColor="@color/white"
+        android:fontFamily="@font/yeon_sung"
+        android:textSize="20dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/nextbutton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
