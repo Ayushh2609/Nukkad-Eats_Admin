@@ -35,22 +35,22 @@ class PendingItemAdapter(
                 foodItemImage.setImageResource(foodImage[position])
 
                 acceptBtn.apply {
-                    if(!isAccepted){
+                    if (!isAccepted) {
                         text = "Accepted"
-                    }else{
+                    } else {
                         text = "Dispatched"
                     }
                     setOnClickListener {
-                        if(!isAccepted){
+                        if (!isAccepted) {
                             text = "Dispatched"
                             isAccepted = true
-                            Toast.makeText(context , "Order Accepted" , Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "Order Accepted", Toast.LENGTH_SHORT).show()
 
-                        }else{
+                        } else {
                             customerList.removeAt(adapterPosition)
                             notifyItemRemoved(adapterPosition)
 
-                            Toast.makeText(context , "Order Dispatched" , Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "Order Dispatched", Toast.LENGTH_SHORT).show()
                         }
 
 
