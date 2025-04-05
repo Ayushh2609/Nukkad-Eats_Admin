@@ -33,15 +33,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.outForDelivery.setOnClickListener{
-
+            startActivity(Intent(this , OutForDeliveryActivity::class.java))
         }
 
         binding.feedback.setOnClickListener{
-
+            startActivity(Intent(this , FeedbackActivity::class.java))
         }
 
         binding.profile.setOnClickListener{
-
+            startActivity(Intent(this , AdminProfileActivity::class.java))
         }
 
         binding.moneyOnHold.setOnClickListener{
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.createNewUser.setOnClickListener{
-
+            startActivity(Intent(this , CreateNewUserActivity::class.java))
         }
 
         binding.logout.setOnClickListener{
