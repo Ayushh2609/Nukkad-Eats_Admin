@@ -48,7 +48,7 @@
 
 
     <EditText
-        android:id="@+id/editTextTextUserAddress"
+        android:id="@+id/editTextUserName"
         android:layout_width="327dp"
         android:layout_height="57dp"
         android:background="@drawable/whitebutton"
@@ -82,10 +82,10 @@
         android:textColorHint="#5B5B5B"
         android:inputType="textEmailAddress"
         android:paddingLeft="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextUserAddress"
+        app:layout_constraintEnd_toEndOf="@+id/editTextUserName"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextUserAddress"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextUserAddress" />
+        app:layout_constraintStart_toStartOf="@+id/editTextUserName"
+        app:layout_constraintTop_toBottomOf="@+id/editTextUserName" />
 
     <EditText
         android:id="@+id/editTextTextEmailAddress"
