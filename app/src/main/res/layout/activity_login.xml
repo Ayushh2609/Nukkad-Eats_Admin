@@ -48,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress"
+        android:id="@+id/emailID"
         android:layout_width="327dp"
         android:layout_height="57dp"
         android:layout_marginTop="140dp"
@@ -59,6 +59,7 @@
         android:ems="10"
         android:fontFamily="@font/lato"
         android:hint="Email"
+        android:textColor="@color/black"
         android:inputType="textEmailAddress"
         android:paddingLeft="10dp"
         android:textColorHint="#5B5B5B"
@@ -68,7 +69,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/password"
         android:layout_width="327dp"
         android:layout_height="57dp"
         android:layout_marginTop="16dp"
@@ -79,13 +80,14 @@
         android:ems="10"
         android:fontFamily="@font/lato"
         android:hint="Password"
+        android:textColor="@color/black"
         android:textColorHint="#5B5B5B"
         android:inputType="textPassword"
         android:paddingLeft="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextEmailAddress"
+        app:layout_constraintEnd_toEndOf="@+id/emailID"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextEmailAddress"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+        app:layout_constraintStart_toStartOf="@+id/emailID"
+        app:layout_constraintTop_toBottomOf="@+id/emailID" />
 
     <TextView
         android:id="@+id/textView8"
@@ -94,10 +96,10 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/lato"
         android:text="Or"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword"
+        app:layout_constraintEnd_toEndOf="@+id/password"
         app:layout_constraintHorizontal_bias="0.486"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPassword"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintStart_toStartOf="@+id/password"
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <TextView
         android:id="@+id/textView9"
@@ -146,7 +148,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button3"
+        android:id="@+id/loginButton"
         android:layout_width="157dp"
         android:layout_height="57dp"
         android:layout_marginTop="45dp"
