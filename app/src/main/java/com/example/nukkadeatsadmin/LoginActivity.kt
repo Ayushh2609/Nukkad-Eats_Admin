@@ -1,20 +1,24 @@
 package com.example.nukkadeatsadmin
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.nukkadeatsadmin.Modal.UserModal
 import com.example.nukkadeatsadmin.databinding.ActivityLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
@@ -72,6 +76,11 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+        binding.googleButton.setOnClickListener {
+            val signIntent = googleSignInClient.signInIntent
+            launcher.launch(signIntent)
+        }
+
         binding.dontHaveAccount.setOnClickListener {
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
@@ -108,6 +117,44 @@ class LoginActivity : AppCompatActivity() {
         val userId = FirebaseAuth.getInstance().currentUser!!.uid
         userId?.let {
             database.child("users").child(it).setValue(user)
+        }
+    }
+
+
+    private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){result ->
+        if(result.resultCode == Activity.RESULT_OK){
+            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+            if(task.isSuccessful){
+                val account: GoogleSignInAccount = task.result
+                val credential = GoogleAuthProvider.getCredential(account.idToken , null)
+
+                auth.signInWithCredential(credential).addOnCompleteListener {authTask->
+                    if(authTask.isSuccessful){
+                        //Successfully signed in with Google
+                        Toast.makeText(this, "Signed in with Google", Toast.LENGTH_SHORT).show()
+                        updateUi(authTask.result?.user)
+                        finish()
+
+                    }else{
+                        //Failed to sign in with Google
+                        Toast.makeText(this, "Failed to sign in with Google", Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+            }else{
+                //Failed to sign in with Google
+                Toast.makeText(this, "Failed to sign in with Google", Toast.LENGTH_SHORT).show()
+
+            }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val currentUser = auth.currentUser
+        if(currentUser != null){
+            startActivity(Intent(this , MainActivity::class.java))
+            finish()
         }
     }
 
