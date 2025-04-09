@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
@@ -39,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
     private lateinit var googleSignInClient: GoogleSignInClient
-    private lateinit var callbackManager: CallbackManager
+    private val callbackManager: CallbackManager = CallbackManager.Factory.create()
 
     private val binding: ActivityLoginBinding by lazy {
         ActivityLoginBinding.inflate(layoutInflater)
@@ -61,9 +60,6 @@ class LoginActivity : AppCompatActivity() {
 
         // Initializing GoogleSignIn
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions)
-
-        //CallBackManager Initialize
-        callbackManager = CallbackManager.Factory.create()
 
         // Initialize Firebase Auth
         auth = Firebase.auth
@@ -117,7 +113,6 @@ class LoginActivity : AppCompatActivity() {
                 }
             })
 
-
         }
 
         binding.dontHaveAccount.setOnClickListener {
@@ -161,8 +156,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private val launcher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+    private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
                 if (task.isSuccessful) {
@@ -172,9 +166,11 @@ class LoginActivity : AppCompatActivity() {
                     auth.signInWithCredential(credential).addOnCompleteListener { authTask ->
                         if (authTask.isSuccessful) {
                             val user = auth.currentUser
+                            Toast.makeText(this, "Welcome ${user?.displayName}", Toast.LENGTH_SHORT).show()
+
+                            //Saving data to Firebase
                             saveData(user?.displayName , null , user?.email , null ,"Google")
                             //Successfully signed in with Google
-                            Toast.makeText(this, "Signed in with Google", Toast.LENGTH_SHORT).show()
                             updateUi(authTask.result?.user)
                             finish()
 
@@ -206,14 +202,18 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun updateUi(user: FirebaseUser?) {
-        startActivity(Intent(this, MainActivity::class.java))
+        if (user != null) {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        } else {
+            Toast.makeText(this, "Authentication failed. Please try again.", Toast.LENGTH_SHORT).show()
+        }
     }
 
 
     // FacebookLogin
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         // Pass the activity result back to the Facebook SDK
         callbackManager.onActivityResult(requestCode, resultCode, data)
     }
@@ -228,14 +228,18 @@ class LoginActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("Success", "signInWithCredential:success")
                     val user = auth.currentUser
+                    Toast.makeText(this , "Welcome ${user?.displayName}" , Toast.LENGTH_SHORT).show()
+
+                    //Saving Data to Firebase
                     saveData(user?.displayName , null , user?.email , null ,"Facebook")
                     updateUi(user)
+
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("Fail", "signInWithCredential:failure", task.exception)
                     Toast.makeText(
-                        baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT
+                        baseContext, "Email already exists, Try with google",
+                        Toast.LENGTH_LONG
                     ).show()
                     updateUi(null)
                 }
