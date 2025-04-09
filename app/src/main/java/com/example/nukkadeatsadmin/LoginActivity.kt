@@ -25,7 +25,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.auth.auth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
@@ -63,6 +62,9 @@ class LoginActivity : AppCompatActivity() {
         // Initializing GoogleSignIn
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions)
 
+        //CallBackManager Initialize
+        callbackManager = CallbackManager.Factory.create()
+
         // Initialize Firebase Auth
         auth = Firebase.auth
 
@@ -93,7 +95,6 @@ class LoginActivity : AppCompatActivity() {
 
         //Facebook Button
         binding.facebookButton.setOnClickListener {
-            callbackManager = CallbackManager.Factory.create()
 
             LoginManager.getInstance().logInWithReadPermissions(
                 this,
