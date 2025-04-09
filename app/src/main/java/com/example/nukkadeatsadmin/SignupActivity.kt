@@ -53,7 +53,7 @@ class SignupActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        binding.signUpCreateButton.setOnClickListener {
+        binding.createAccountButton.setOnClickListener {
 
             //Getting text from edit texts(User) and saving it to the variables
             username = binding.editTextUserName.text.toString().trim()

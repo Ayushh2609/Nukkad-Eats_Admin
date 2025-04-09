@@ -5,4 +5,9 @@
     <string name="feedbackMessage">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</string>
     <string name="default_web_client_id">67608108403-7lgi5ddi8p3t4ci262r0v8vl8tulgteo.apps.googleusercontent.com</string>
 
+
+    <string name="facebook_app_id">1479094426753466</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">56789</string>
+
 </resources>

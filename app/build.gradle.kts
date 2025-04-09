@@ -63,8 +63,9 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth:21.3.0")
     implementation("com.google.firebase:firebase-analytics")
 
-
     apply(plugin = "com.google.gms.google-services")
 
+    //Facebook
+    implementation ("com.facebook.android:facebook-android-sdk:latest.release")
 
 }
