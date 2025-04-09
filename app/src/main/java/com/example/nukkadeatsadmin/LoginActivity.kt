@@ -148,12 +148,14 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveData() {
-        email = binding.emailID.text.toString().trim()
-        passw = binding.password.text.toString().trim()
-
-        val user = UserModal(email, passw)
-        val userId = FirebaseAuth.getInstance().currentUser!!.uid
+    private fun saveData(name : String? , resName : String? , emailId : String? , password : String? , loginMethod  : String?) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        val user = UserModal(
+            name = name,
+            resName = resName,
+            email = emailId,
+            password = password,
+            loginMethod = loginMethod)
         userId?.let {
             database.child("users").child(it).setValue(user)
         }
@@ -169,6 +171,8 @@ class LoginActivity : AppCompatActivity() {
 
                     auth.signInWithCredential(credential).addOnCompleteListener { authTask ->
                         if (authTask.isSuccessful) {
+                            val user = auth.currentUser
+                            saveData(user?.displayName , null , user?.email , null ,"Google")
                             //Successfully signed in with Google
                             Toast.makeText(this, "Signed in with Google", Toast.LENGTH_SHORT).show()
                             updateUi(authTask.result?.user)
@@ -224,6 +228,7 @@ class LoginActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("Success", "signInWithCredential:success")
                     val user = auth.currentUser
+                    saveData(user?.displayName , null , user?.email , null ,"Facebook")
                     updateUi(user)
                 } else {
                     // If sign in fails, display a message to the user.
