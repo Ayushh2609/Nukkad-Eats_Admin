@@ -1,3 +1,4 @@
-src/google-services.json
+app/src/main/res/values/strings.xml
+app/src/google-services.json
 
 /build
