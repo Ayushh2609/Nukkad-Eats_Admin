@@ -52,14 +52,8 @@ class AddMenuActivity : AppCompatActivity() {
             foodName = binding.itemName.text.toString().trim()
             foodPrice = binding.itemPrice.text.toString().trim()
             foodDescription = binding.itemDescription.text.toString().trim()
-            foodName = binding.itemIngredients.text.toString().trim()
-        }
+            foodIngredients = binding.itemIngredients.text.toString().trim()
 
-        binding.backButton.setOnClickListener {
-            finish()
-        }
-
-        binding.AddItemBtn.setOnClickListener {
             var isValid = true
 
             if (binding.itemName.text.toString().trim().isEmpty()) {
@@ -89,11 +83,14 @@ class AddMenuActivity : AppCompatActivity() {
                 uploadData()
                 finish()
             }
+        }
 
-            binding.addImage.setOnClickListener {
-                pickImage.launch("image/*")
-            }
+        binding.backButton.setOnClickListener {
+            finish()
+        }
 
+        binding.addImage.setOnClickListener {
+            pickImage.launch("image/*")
         }
     }
 
