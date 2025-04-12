@@ -91,7 +91,7 @@
         android:textSize="20dp"
         android:padding="5dp"
         android:fontFamily="@font/yeon_sung"
-        android:inputType="text"
+        android:inputType="number"
         android:paddingLeft="8dp"
         android:hint="Name"
         app:layout_constraintEnd_toEndOf="@+id/itemName"

@@ -79,9 +79,9 @@ class AddMenuActivity : AppCompatActivity() {
                 isValid = false
             }
             if (isValid) {
-                Toast.makeText(this, "The item has added", Toast.LENGTH_SHORT).show()
                 uploadData()
                 finish()
+                Toast.makeText(this, "The item has added", Toast.LENGTH_SHORT).show()
             }
         }
 

@@ -69,4 +69,6 @@ dependencies {
     //Facebook
     implementation ("com.facebook.android:facebook-android-sdk:latest.release")
 
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+
 }
