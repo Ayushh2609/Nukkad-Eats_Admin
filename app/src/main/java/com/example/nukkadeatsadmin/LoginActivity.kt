@@ -152,7 +152,9 @@ class LoginActivity : AppCompatActivity() {
             password = password,
             loginMethod = loginMethod)
         userId?.let {
-            database.child("users").child(it).setValue(user)
+
+            //Saving data to Admins node in Firebase Database
+            database.child("Admins").child(it).setValue(user)
         }
     }
 
@@ -217,7 +219,6 @@ class LoginActivity : AppCompatActivity() {
         // Pass the activity result back to the Facebook SDK
         callbackManager.onActivityResult(requestCode, resultCode, data)
     }
-
     private fun handleFacebookAccessToken(token: AccessToken1) {
         Log.d("Facebook Tag", "handleFacebookAccessToken:$token")
 

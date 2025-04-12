@@ -26,7 +26,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
-
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
@@ -149,6 +148,7 @@ class SignupActivity : AppCompatActivity() {
 
     }
 
+    //Create Account with Email and Password
     private fun createAccount(email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -164,19 +164,6 @@ class SignupActivity : AppCompatActivity() {
         }
     }
 
-    //Save Data to Firebase Database
-    private fun saveData(name : String? , resName : String? , emailId : String? , password : String? , loginMethod  : String?) {
-        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
-        val user = UserModal(
-            name = name,
-            resName = resName,
-            email = emailId,
-            password = password,
-            loginMethod = loginMethod)
-        userId?.let {
-            database.child("users").child(it).setValue(user)
-        }
-    }
 
     //Facebook SignIn Code
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -267,6 +254,20 @@ class SignupActivity : AppCompatActivity() {
         userId?.let {
             database.child("users").child(it).setValue(userData)
 
+        }
+    }
+
+    //Save Data to Firebase Database
+    private fun saveData(name : String? , resName : String? , emailId : String? , password : String? , loginMethod  : String?) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        val user = UserModal(
+            name = name,
+            resName = resName,
+            email = emailId,
+            password = password,
+            loginMethod = loginMethod)
+        userId?.let {
+            database.child("Admins").child(it).setValue(user)
         }
     }
 }
