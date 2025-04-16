@@ -42,7 +42,7 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var password: String
     private lateinit var database: DatabaseReference
     private lateinit var googleSignInClient: GoogleSignInClient
-    private lateinit var callbackManager : CallbackManager
+    private lateinit var callbackManager: CallbackManager
 
     private val binding: ActivitySignupBinding by lazy {
         ActivitySignupBinding.inflate(layoutInflater)
@@ -172,6 +172,7 @@ class SignupActivity : AppCompatActivity() {
         // Pass the activity result back to the Facebook SDK
         callbackManager.onActivityResult(requestCode, resultCode, data)
     }
+
     private fun handleFacebookAccessToken(token: AccessToken) {
         Log.d("Facebook Tag", "handleFacebookAccessToken:$token")
 
@@ -182,8 +183,8 @@ class SignupActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("Success", "signInWithCredential:success")
                     val user = auth.currentUser
-                    Toast.makeText(this , "Welcome ${user?.displayName}" , Toast.LENGTH_SHORT).show()
-                    saveData(user?.displayName , null , user?.email , null ,"Facebook")
+                    Toast.makeText(this, "Welcome ${user?.displayName}", Toast.LENGTH_SHORT).show()
+                    saveData(user?.displayName, null, user?.email, null, "Facebook")
                     updateUi(user)
 
                 } else {
@@ -200,41 +201,43 @@ class SignupActivity : AppCompatActivity() {
 
 
     //Google SignIn Code
-    private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-            if (task.isSuccessful) {
-                val account: GoogleSignInAccount = task.result
-                val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+    private val launcher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+                if (task.isSuccessful) {
+                    val account: GoogleSignInAccount = task.result
+                    val credential = GoogleAuthProvider.getCredential(account.idToken, null)
 
-                auth.signInWithCredential(credential).addOnCompleteListener { authTask ->
-                    if (authTask.isSuccessful) {
-                        val user = auth.currentUser
-                        Toast.makeText(this, "Welcome ${user?.displayName}", Toast.LENGTH_SHORT).show()
+                    auth.signInWithCredential(credential).addOnCompleteListener { authTask ->
+                        if (authTask.isSuccessful) {
+                            val user = auth.currentUser
+                            Toast.makeText(this, "Welcome ${user?.displayName}", Toast.LENGTH_SHORT)
+                                .show()
 
-                        //Saving data to Firebase
-                        saveData(user?.displayName , null , user?.email , null ,"Google")
-                        //Successfully signed in with Google
-                        updateUi(authTask.result?.user)
-                        finish()
+                            //Saving data to Firebase
+                            saveData(user?.displayName, null, user?.email, null, "Google")
+                            //Successfully signed in with Google
+                            updateUi(authTask.result?.user)
+                            finish()
 
-                    } else {
-                        //Failed to sign in with Google
-                        Toast.makeText(
-                            this,
-                            "Failed to sign in with Google",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        } else {
+                            //Failed to sign in with Google
+                            Toast.makeText(
+                                this,
+                                "Failed to sign in with Google",
+                                Toast.LENGTH_SHORT
+                            ).show()
 
+                        }
                     }
-                }
-            } else {
-                //Failed to sign in with Google
-                Toast.makeText(this, "Failed to sign in with Google", Toast.LENGTH_SHORT).show()
+                } else {
+                    //Failed to sign in with Google
+                    Toast.makeText(this, "Failed to sign in with Google", Toast.LENGTH_SHORT).show()
 
+                }
             }
         }
-    }
 
     //Going to next Activty
     private fun updateUi(user: FirebaseUser?) {
@@ -258,14 +261,21 @@ class SignupActivity : AppCompatActivity() {
     }
 
     //Save Data to Firebase Database
-    private fun saveData(name : String? , resName : String? , emailId : String? , password : String? , loginMethod  : String?) {
+    private fun saveData(
+        name: String?,
+        resName: String?,
+        emailId: String?,
+        password: String?,
+        loginMethod: String?
+    ) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
         val user = UserModal(
             name = name,
             resName = resName,
             email = emailId,
             password = password,
-            loginMethod = loginMethod)
+            loginMethod = loginMethod
+        )
         userId?.let {
             database.child("Admins").child(it).setValue(user)
         }
