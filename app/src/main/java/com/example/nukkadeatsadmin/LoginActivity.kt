@@ -143,14 +143,21 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveData(name : String? , resName : String? , emailId : String? , password : String? , loginMethod  : String?) {
+    private fun saveData(
+        name: String?,
+        resName: String?,
+        emailId: String?,
+        password: String?,
+        loginMethod: String?
+    ) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
         val user = UserModal(
             name = name,
             resName = resName,
             email = emailId,
             password = password,
-            loginMethod = loginMethod)
+            loginMethod = loginMethod
+        )
         userId?.let {
 
             //Saving data to Admins node in Firebase Database
@@ -158,7 +165,8 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+    private val launcher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
                 if (task.isSuccessful) {
@@ -168,10 +176,11 @@ class LoginActivity : AppCompatActivity() {
                     auth.signInWithCredential(credential).addOnCompleteListener { authTask ->
                         if (authTask.isSuccessful) {
                             val user = auth.currentUser
-                            Toast.makeText(this, "Welcome ${user?.displayName}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Welcome ${user?.displayName}", Toast.LENGTH_SHORT)
+                                .show()
 
                             //Saving data to Firebase
-                            saveData(user?.displayName , null , user?.email , null ,"Google")
+                            saveData(user?.displayName, null, user?.email, null, "Google")
                             //Successfully signed in with Google
                             updateUi(authTask.result?.user)
                             finish()
@@ -208,7 +217,8 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         } else {
-            Toast.makeText(this, "Authentication failed. Please try again.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Authentication failed. Please try again.", Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
@@ -219,6 +229,7 @@ class LoginActivity : AppCompatActivity() {
         // Pass the activity result back to the Facebook SDK
         callbackManager.onActivityResult(requestCode, resultCode, data)
     }
+
     private fun handleFacebookAccessToken(token: AccessToken1) {
         Log.d("Facebook Tag", "handleFacebookAccessToken:$token")
 
@@ -229,10 +240,10 @@ class LoginActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("Success", "signInWithCredential:success")
                     val user = auth.currentUser
-                    Toast.makeText(this , "Welcome ${user?.displayName}" , Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Welcome ${user?.displayName}", Toast.LENGTH_SHORT).show()
 
                     //Saving Data to Firebase
-                    saveData(user?.displayName , null , user?.email , null ,"Facebook")
+                    saveData(user?.displayName, null, user?.email, null, "Facebook")
                     updateUi(user)
 
                 } else {
