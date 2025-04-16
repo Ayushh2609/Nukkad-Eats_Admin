@@ -18,13 +18,14 @@ import com.google.firebase.database.ValueEventListener
 
 class AllItemMenuActivity : AppCompatActivity() {
 
-    private lateinit var databaseReference : DatabaseReference
-    private lateinit var database : FirebaseDatabase
-    private var menuItems : ArrayList<AllMenu> = ArrayList()
+    private lateinit var databaseReference: DatabaseReference
+    private lateinit var database: FirebaseDatabase
+    private var menuItems: ArrayList<AllMenu> = ArrayList()
 
-    private val binding : ActivityAllItemMenuBinding by lazy {
+    private val binding: ActivityAllItemMenuBinding by lazy {
         ActivityAllItemMenuBinding.inflate(layoutInflater)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -47,15 +48,15 @@ class AllItemMenuActivity : AppCompatActivity() {
 
     private fun retrieveMenuItem() {
         database = FirebaseDatabase.getInstance()
-        val foodRef : DatabaseReference = database.reference.child("menu")
+        val foodRef: DatabaseReference = database.reference.child("menu")
 
-        foodRef.addListenerForSingleValueEvent(object : ValueEventListener{
+        foodRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 menuItems.clear()
 
-                for(foodSnapshot in snapshot.children){
+                for (foodSnapshot in snapshot.children) {
                     val menuItem = foodSnapshot.getValue(AllMenu::class.java)
-                    menuItem?.let{
+                    menuItem?.let {
                         menuItems.add(it)
                     }
                 }
@@ -63,7 +64,7 @@ class AllItemMenuActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.d("Database Error" , "Error: ${error.message}")
+                Log.d("Database Error", "Error: ${error.message}")
             }
 
         })
@@ -71,7 +72,7 @@ class AllItemMenuActivity : AppCompatActivity() {
     }
 
     private fun setAdapter() {
-        val adapter = AllItemAdapter(this , menuItems , databaseReference)
+        val adapter = AllItemAdapter(this, menuItems, databaseReference)
 
         binding.recyclerItems.layoutManager = LinearLayoutManager(this)
         binding.recyclerItems.adapter = adapter
