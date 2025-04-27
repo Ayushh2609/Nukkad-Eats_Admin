@@ -70,9 +70,9 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:text="2"
+                        android:textColor="#25AD2B"
                         android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="#25AD2B" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -91,10 +91,10 @@
 
                     android:layout_width="80dp"
                     android:layout_height="35dp"
-                    android:background="@drawable/nextbutton"
-                    android:text="Accept"
                     android:layout_gravity="center"
+                    android:background="@drawable/nextbutton"
                     android:fontFamily="@font/yeon_sung"
+                    android:text="Accept"
                     android:textColor="@color/white"
                     android:textSize="10dp" />
 
