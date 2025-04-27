@@ -230,7 +230,7 @@
                 android:fontFamily="@font/yeon_sung"
                 android:text="Add All Items"
                 android:textColor="#BB0C24"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
 
         </LinearLayout>
@@ -270,7 +270,7 @@
                 android:fontFamily="@font/yeon_sung"
                 android:text="Out for Delivery"
                 android:textColor="#BB0C24"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
 
         </LinearLayout>
@@ -310,7 +310,7 @@
                 android:fontFamily="@font/yeon_sung"
                 android:text="Feedback"
                 android:textColor="#BB0C24"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
 
         </LinearLayout>
@@ -350,7 +350,7 @@
                 android:fontFamily="@font/yeon_sung"
                 android:text="Profile"
                 android:textColor="#BB0C24"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
 
         </LinearLayout>
@@ -390,7 +390,7 @@
                 android:fontFamily="@font/yeon_sung"
                 android:text="Money on Hold"
                 android:textColor="#BB0C24"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
 
         </LinearLayout>
@@ -430,7 +430,7 @@
                 android:fontFamily="@font/yeon_sung"
                 android:text="Create New User"
                 android:textColor="#BB0C24"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
 
         </LinearLayout>
@@ -470,7 +470,7 @@
                 android:fontFamily="@font/yeon_sung"
                 android:text="Log out"
                 android:textColor="#BB0C24"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
