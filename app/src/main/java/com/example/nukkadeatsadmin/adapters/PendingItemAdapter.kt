@@ -1,16 +1,26 @@
 package com.example.nukkadeatsadmin.adapters
 
+import android.content.Context
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.nukkadeatsadmin.databinding.PendingItemsBinding
 
 class PendingItemAdapter(
-    private val customerList: ArrayList<String>,
-    private val quantityList: ArrayList<String>,
-    private val foodImage: ArrayList<Int>
+    private val context: Context,
+    private val customerNameList: MutableList<String>,
+    private val quantityList: MutableList<String>,
+    private val foodImage: MutableList<String>,
+    private val itemClicked : OnItemClicked
+
 ) : RecyclerView.Adapter<PendingItemAdapter.ViewHolder>() {
+
+    interface OnItemClicked{
+        fun onItemClicked(position: Int)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
@@ -23,16 +33,19 @@ class PendingItemAdapter(
         holder.bind(position)
     }
 
-    override fun getItemCount(): Int = customerList.size
+    override fun getItemCount(): Int = customerNameList.size
 
     inner class ViewHolder(private val binding: PendingItemsBinding) :
         RecyclerView.ViewHolder(binding.root) {
         private var isAccepted = false
         fun bind(position: Int) {
             binding.apply {
-                customerName.text = customerList[position]
+                customerName.text = customerNameList[position]
                 quantityNumber.text = quantityList[position]
-                foodItemImage.setImageResource(foodImage[position])
+
+                val uriString = foodImage[position]
+                val uri = Uri.parse(uriString)
+                Glide.with(context).load(uri).into(foodItemImage)
 
                 acceptBtn.apply {
                     if (!isAccepted) {
@@ -47,7 +60,7 @@ class PendingItemAdapter(
                             Toast.makeText(context, "Order Accepted", Toast.LENGTH_SHORT).show()
 
                         } else {
-                            customerList.removeAt(adapterPosition)
+                            customerNameList.removeAt(adapterPosition)
                             notifyItemRemoved(adapterPosition)
 
                             Toast.makeText(context, "Order Dispatched", Toast.LENGTH_SHORT).show()
@@ -56,6 +69,10 @@ class PendingItemAdapter(
 
                     }
 
+                }
+
+                itemView.setOnClickListener {
+                    itemClicked.onItemClicked(position)
                 }
             }
         }
