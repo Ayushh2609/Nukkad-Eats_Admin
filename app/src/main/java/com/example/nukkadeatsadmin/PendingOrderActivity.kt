@@ -24,7 +24,7 @@ class PendingOrderActivity : AppCompatActivity() , PendingItemAdapter.OnItemClic
     private var listOfNames : MutableList<String> = mutableListOf()
     private var listOfTotalPrice : MutableList<String> = mutableListOf()
     private var listOfImageFirstFoodOrder : MutableList<String> = mutableListOf()
-    private var listOfOrderItem : MutableList<OrderDetails> = mutableListOf()
+    private var listOfOrderItem : ArrayList<OrderDetails> = arrayListOf()
     private lateinit var database: FirebaseDatabase
     private lateinit var databaseOrderDetails: DatabaseReference
 

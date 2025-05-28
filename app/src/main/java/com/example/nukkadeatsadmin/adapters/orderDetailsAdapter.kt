@@ -1,9 +1,11 @@
 package com.example.nukkadeatsadmin.adapters
 
 import android.content.Context
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.nukkadeatsadmin.databinding.OrderDetailsBinding
 
 class orderDetailsAdapter(
@@ -35,7 +37,11 @@ class orderDetailsAdapter(
                 foodName.text = foodNames[position]
                 foodPrice.text = foodPrices[position]
                 foodQuantity.text = foodQuantities[position].toString()
-                foodName.text = foodNames[position]
+
+                val uriString = foodImages[position]
+                val uri = Uri.parse(uriString)
+                Glide.with(context).load(uri).into(foodItemImage)
+
             }
         }
 
