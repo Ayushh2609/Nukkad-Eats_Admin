@@ -2,6 +2,7 @@ package com.example.nukkadeatsadmin
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,15 +17,15 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class PendingOrderActivity : AppCompatActivity() , PendingItemAdapter.OnItemClicked{
-    private val binding : ActivityPendingOrderBinding by lazy{
+class PendingOrderActivity : AppCompatActivity(), PendingItemAdapter.OnItemClicked {
+    private val binding: ActivityPendingOrderBinding by lazy {
         ActivityPendingOrderBinding.inflate(layoutInflater)
     }
 
-    private var listOfNames : MutableList<String> = mutableListOf()
-    private var listOfTotalPrice : MutableList<String> = mutableListOf()
-    private var listOfImageFirstFoodOrder : MutableList<String> = mutableListOf()
-    private var listOfOrderItem : ArrayList<OrderDetails> = arrayListOf()
+    private var listOfNames: MutableList<String> = mutableListOf()
+    private var listOfTotalPrice: MutableList<String> = mutableListOf()
+    private var listOfImageFirstFoodOrder: MutableList<String> = mutableListOf()
+    private var listOfOrderItem: ArrayList<OrderDetails> = arrayListOf()
     private lateinit var database: FirebaseDatabase
     private lateinit var databaseOrderDetails: DatabaseReference
 
@@ -38,6 +39,8 @@ class PendingOrderActivity : AppCompatActivity() , PendingItemAdapter.OnItemClic
             insets
         }
 
+        binding.backButton.setOnClickListener { finish()}
+
         //Initializing Database
         database = FirebaseDatabase.getInstance()
 
@@ -47,14 +50,13 @@ class PendingOrderActivity : AppCompatActivity() , PendingItemAdapter.OnItemClic
         getOrderDetails()
 
 
-
     }
 
     private fun getOrderDetails() {
         //Retrieve order details from Firebase
-        databaseOrderDetails.addValueEventListener(object : ValueEventListener{
+        databaseOrderDetails.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                for(orderSnapshot in snapshot.children){
+                for (orderSnapshot in snapshot.children) {
                     val orderDetails = orderSnapshot.getValue(OrderDetails::class.java)
                     orderDetails?.let {
                         listOfOrderItem.add(it)
@@ -65,18 +67,18 @@ class PendingOrderActivity : AppCompatActivity() , PendingItemAdapter.OnItemClic
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+
             }
 
         })
     }
 
     private fun addDataToListForRecyclerView() {
-        for(orderItem in listOfOrderItem){
+        for (orderItem in listOfOrderItem) {
 
             orderItem.userName?.let { listOfNames.add(it) }
             orderItem.totalPrices?.let { listOfTotalPrice.add(it) }
-            orderItem.foodImages?.filterNot {it.isEmpty() }?.forEach{
+            orderItem.foodImages?.filterNot { it.isEmpty() }?.forEach {
                 listOfImageFirstFoodOrder.add(it)
             }
         }
@@ -85,14 +87,62 @@ class PendingOrderActivity : AppCompatActivity() , PendingItemAdapter.OnItemClic
 
     private fun setAdapter() {
         binding.pendingRecyclerView.layoutManager = LinearLayoutManager(this)
-        val adapter = PendingItemAdapter(this , listOfNames , listOfTotalPrice , listOfImageFirstFoodOrder , this)
+        val adapter =
+            PendingItemAdapter(this, listOfNames, listOfTotalPrice, listOfImageFirstFoodOrder, this)
         binding.pendingRecyclerView.adapter = adapter
     }
 
     override fun onItemClicked(position: Int) {
-        val intent = Intent(this , UserOrderDetailsActivity::class.java)
+        val intent = Intent(this, UserOrderDetailsActivity::class.java)
         val userOrderDetails = listOfOrderItem[position]
-        intent.putExtra("userOrderDetails" ,userOrderDetails)
+        intent.putExtra("userOrderDetails", userOrderDetails)
         startActivity(intent)
+    }
+
+    override fun onItemAcceptClicked(position: Int) {
+        //Handle item Acceptance and Update Database
+        val childItemPushKey = listOfOrderItem[position].itemPushKey
+        val clickItemOrderReference = childItemPushKey?.let {
+            database.reference.child("OrderDetails").child(it)
+        }
+        clickItemOrderReference?.child("AcceptOrder")?.setValue(true)
+
+        updateOrderAcceptStatus(position)
+
+    }
+
+    private fun updateOrderAcceptStatus(position: Int) {
+        //Update order acceptance in user's buy history and user details
+        val userIdOfClickedItem = listOfOrderItem[position].userId
+        val pushKeyOfClickedItem = listOfOrderItem[position].itemPushKey
+        val buyHistoryReference =
+            database.reference.child("users").child(userIdOfClickedItem!!).child("OrderHistory")
+                .child(pushKeyOfClickedItem!!)
+
+        buyHistoryReference.child("AcceptOrder").setValue(true)
+        databaseOrderDetails.child(pushKeyOfClickedItem).child("AcceptOrder").setValue(true)
+
+    }
+
+    override fun onItemDispatchedClicked(position: Int) {
+        val dispatchItemPushKey = listOfOrderItem[position].itemPushKey
+        val dispatchItemOrderReference = database.reference.child("CompleteOrder").child(dispatchItemPushKey!!)
+        dispatchItemOrderReference.setValue(listOfOrderItem[position])
+            .addOnSuccessListener {
+                deleteThisItemFromOrderDetails(dispatchItemPushKey)
+            }
+    }
+
+    private fun deleteThisItemFromOrderDetails(dispatchItemPushKey: String){
+
+        val orderDetailsItemReference = database.reference.child("OrderDetails").child(dispatchItemPushKey)
+        orderDetailsItemReference.removeValue()
+            .addOnSuccessListener {
+                Toast.makeText(this , "Order is dispatched" , Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+                Toast.makeText(this , "Order is not dispatched" , Toast.LENGTH_SHORT).show()
+
+            }
     }
 }

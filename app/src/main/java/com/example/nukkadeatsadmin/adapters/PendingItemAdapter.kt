@@ -5,8 +5,10 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.nukkadeatsadmin.R
 import com.example.nukkadeatsadmin.databinding.PendingItemsBinding
 
 class PendingItemAdapter(
@@ -20,6 +22,8 @@ class PendingItemAdapter(
 
     interface OnItemClicked{
         fun onItemClicked(position: Int)
+        fun onItemAcceptClicked(position: Int)
+        fun onItemDispatchedClicked(position: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -55,15 +59,20 @@ class PendingItemAdapter(
                     }
                     setOnClickListener {
                         if (!isAccepted) {
+                            background = ContextCompat.getDrawable(context, R.drawable.green_button)
                             text = "Dispatched"
                             isAccepted = true
                             Toast.makeText(context, "Order Accepted", Toast.LENGTH_SHORT).show()
+
+                            itemClicked.onItemAcceptClicked(position)
 
                         } else {
                             customerNameList.removeAt(adapterPosition)
                             notifyItemRemoved(adapterPosition)
 
                             Toast.makeText(context, "Order Dispatched", Toast.LENGTH_SHORT).show()
+
+                            itemClicked.onItemDispatchedClicked(position)
                         }
 
 

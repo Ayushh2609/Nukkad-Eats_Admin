@@ -78,7 +78,6 @@
                     android:layout_marginLeft="49dp"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:drawableEnd="@drawable/edit_icon"
                     android:gravity="start|center_vertical"
                     android:hint="Badnam Munni"
                     android:text="" />
@@ -123,7 +122,6 @@
                     android:layout_marginLeft="40dp"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:drawableEnd="@drawable/edit_icon"
                     android:gravity="start|center"
                     android:hint="Munni bhavan prem nagar, dehradun, uttrakhand, India, Earth, Milky way Galaxy" />
 
@@ -166,7 +164,6 @@
                     android:layout_marginLeft="45dp"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:drawableEnd="@drawable/edit_icon"
                     android:gravity="start|center_vertical"
                     android:hint="6969696969"
                     android:inputType="phone"
@@ -211,7 +208,6 @@
                     android:layout_marginLeft="45dp"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:drawableEnd="@drawable/edit_icon"
                     android:gravity="start|center_vertical"
                     android:hint="6969696969"
                     android:inputType="phone"

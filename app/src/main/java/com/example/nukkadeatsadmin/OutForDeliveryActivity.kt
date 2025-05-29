@@ -28,12 +28,9 @@ class OutForDeliveryActivity : AppCompatActivity() {
             finish()
         }
 
-        val customerNameList = arrayListOf("Ayush Paliwal" , "Anchal" , "Abhijeet" , "Akshay kumar" , "Sunny Leone")
-        val moneyStatusList = arrayListOf("Received" , "Not Received" , "Not Received" , "Received" , "Not Received")
-
-        val adapter = OutForDeliveryAdapter(customerNameList , moneyStatusList)
+//        val adapter = OutForDeliveryAdapter()
         binding.customerReceiveRecycler.layoutManager = LinearLayoutManager(this)
-        binding.customerReceiveRecycler.adapter = adapter
+//        binding.customerReceiveRecycler.adapter = adapter
 
     }
 }

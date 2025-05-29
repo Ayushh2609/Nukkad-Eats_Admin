@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/yeon_sung"
         android:text="Out for Delivery"
-        android:textColor="#FF0000"
+        android:textColor="#F44336"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="@+id/backButton"
         app:layout_constraintEnd_toEndOf="parent"
