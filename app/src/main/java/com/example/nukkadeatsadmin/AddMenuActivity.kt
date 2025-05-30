@@ -113,6 +113,7 @@ class AddMenuActivity : AppCompatActivity() {
 
                     //Create a new Menu Item
                     val newItem = AllMenu(
+                        newItemKey,
                         foodName = foodName,
                         foodPrice = foodPrice,
                         foodDescription = foodDescription,
