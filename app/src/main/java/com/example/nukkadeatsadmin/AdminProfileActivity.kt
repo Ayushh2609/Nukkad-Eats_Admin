@@ -23,7 +23,7 @@ class AdminProfileActivity : AppCompatActivity() {
     }
         private lateinit var auth : FirebaseAuth
         private lateinit var database : FirebaseDatabase
-        private lateinit var adminreference : DatabaseReference
+        private lateinit var adminReference : DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +37,7 @@ class AdminProfileActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
-        adminreference = database.reference.child("Admins")
+        adminReference = database.reference.child("Admins")
 
         binding.backButton.setOnClickListener {
             finish()
@@ -85,10 +85,10 @@ class AdminProfileActivity : AppCompatActivity() {
     private fun retrieveAdminData() {
         val currentUserUid = auth.currentUser?.uid
         if(currentUserUid != null){
-            adminreference = adminreference.child(currentUserUid)
+            adminReference = adminReference.child(currentUserUid)
         }
 
-        adminreference.addValueEventListener(object : ValueEventListener{
+        adminReference.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()){
                     var adminName = snapshot.child("name").getValue()
@@ -133,9 +133,9 @@ class AdminProfileActivity : AppCompatActivity() {
 
 
         var adminData = UserModal(updateName , updateAddress , null , updateEmail , updatePhone , updatePassword , null)
-        adminreference.setValue(adminData).addOnSuccessListener {
+        adminReference.setValue(adminData).addOnSuccessListener {
 
-            Toast.makeText(this , "Profile update failed" , Toast.LENGTH_SHORT).show()
+            Toast.makeText(this , "Profile update Successful" , Toast.LENGTH_SHORT).show()
             auth.currentUser?.updateEmail(updateEmail)
             auth.currentUser?.updatePassword(updatePassword)
 
@@ -148,7 +148,7 @@ class AdminProfileActivity : AppCompatActivity() {
 
 //        val currentAdminId = auth.currentUser?.uid
 //        if(currentAdminId != null){
-//            val adReference = adminreference.child(currentAdminId)
+//            val adReference = adminReference.child(currentAdminId)
 //
 //            adReference.child("name").setValue(updateName)
 //            adReference.child("address").setValue(updateAddress)
