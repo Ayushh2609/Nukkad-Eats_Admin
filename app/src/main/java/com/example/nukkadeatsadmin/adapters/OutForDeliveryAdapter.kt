@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nukkadeatsadmin.databinding.DeliveryItemBinding
 
-class OutForDeliveryAdapter(private val customerNameList : ArrayList<String> , private val moneyStatusList : ArrayList<String>) : RecyclerView.Adapter<OutForDeliveryAdapter.ViewHolder>() {
+class OutForDeliveryAdapter(private val customerNameList : MutableList<String> , private val moneyStatusList : MutableList<Boolean>) : RecyclerView.Adapter<OutForDeliveryAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = DeliveryItemBinding.inflate(LayoutInflater.from(parent.context) , parent , false)
@@ -25,12 +25,17 @@ class OutForDeliveryAdapter(private val customerNameList : ArrayList<String> , p
         fun bind(position: Int) {
             binding.apply {
                 customerName.text = customerNameList[position]
-                receiveStatus.text = moneyStatusList[position]
+
+                if(moneyStatusList[position] == true){
+                    receiveStatus.text = "Received"
+
+                }else{
+                    receiveStatus.text = "Not Received"
+                }
 
                 val colorMap = mapOf(
-                    "Received" to Color.GREEN,
-                    "Not Received" to Color.RED,
-                    "Pending" to Color.YELLOW
+                     true to Color.GREEN,
+                    false to Color.RED
                 )
 
                 receiveStatus.setTextColor(colorMap[moneyStatusList[position]]?:Color.BLACK)

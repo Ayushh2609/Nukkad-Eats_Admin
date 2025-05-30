@@ -41,6 +41,7 @@ class PendingItemAdapter(
 
     inner class ViewHolder(private val binding: PendingItemsBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
         private var isAccepted = false
         fun bind(position: Int) {
             binding.apply {
@@ -52,27 +53,27 @@ class PendingItemAdapter(
                 Glide.with(context).load(uri).into(foodItemImage)
 
                 acceptBtn.apply {
-                    if (!isAccepted) {
-                        text = "Accepted"
-                    } else {
+                    if (isAccepted) {
                         text = "Dispatched"
+                    } else {
+                        text = "Accepted"
                     }
                     setOnClickListener {
-                        if (!isAccepted) {
-                            background = ContextCompat.getDrawable(context, R.drawable.green_button)
-                            text = "Dispatched"
-                            isAccepted = true
-                            Toast.makeText(context, "Order Accepted", Toast.LENGTH_SHORT).show()
-
-                            itemClicked.onItemAcceptClicked(position)
-
-                        } else {
+                        if (isAccepted) {
                             customerNameList.removeAt(adapterPosition)
                             notifyItemRemoved(adapterPosition)
 
                             Toast.makeText(context, "Order Dispatched", Toast.LENGTH_SHORT).show()
 
                             itemClicked.onItemDispatchedClicked(position)
+
+                        } else {
+                            background = ContextCompat.getDrawable(context, R.drawable.green_button)
+                            text = "Dispatched"
+                            isAccepted = true
+                            Toast.makeText(context, "Order Accepted", Toast.LENGTH_SHORT).show()
+
+                            itemClicked.onItemAcceptClicked(position)
                         }
 
 

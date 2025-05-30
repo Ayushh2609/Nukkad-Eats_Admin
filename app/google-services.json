@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "67608108403",
+    "firebase_url": "https://nukkad-eats-default-rtdb.firebaseio.com",
+    "project_id": "nukkad-eats",
+    "storage_bucket": "nukkad-eats.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:67608108403:android:cd81324442d0368b5fb906",
+        "android_client_info": {
+          "package_name": "com.example.nukkadeatsadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "67608108403-7lgi5ddi8p3t4ci262r0v8vl8tulgteo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nukkadeatsadmin",
+            "certificate_hash": "05272780da3b5f28f50d2c2b6de5e9ff1b759102"
+          }
+        },
+        {
+          "client_id": "67608108403-uvsmorr6r05m34jrl8s9nu11d28k8oqr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBk3CH8rJtkCL-OQGm4UTpKKwNrHCziIn8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "67608108403-uvsmorr6r05m34jrl8s9nu11d28k8oqr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
