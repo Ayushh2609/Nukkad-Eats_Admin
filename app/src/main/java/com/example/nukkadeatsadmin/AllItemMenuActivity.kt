@@ -2,6 +2,7 @@ package com.example.nukkadeatsadmin
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -72,9 +73,26 @@ class AllItemMenuActivity : AppCompatActivity() {
     }
 
     private fun setAdapter() {
-        val adapter = AllItemAdapter(this, menuItems, databaseReference)
+        val adapter = AllItemAdapter(this, menuItems, databaseReference) { position ->
+            deleteMenuItem(position)
+        }
 
         binding.recyclerItems.layoutManager = LinearLayoutManager(this)
         binding.recyclerItems.adapter = adapter
+    }
+
+    private fun deleteMenuItem(position: Int) {
+        val menuItemToDelete = menuItems[position]
+        val menuItemKey = menuItemToDelete.key
+        val foodMenuReference = database.reference.child("menu").child(menuItemKey!!)
+        foodMenuReference.removeValue().addOnCompleteListener { task ->
+            if(task.isSuccessful){
+                menuItems.removeAt(position)
+                binding.recyclerItems.adapter?.notifyItemRemoved(position)
+            }else{
+                Toast.makeText(this , "Item not deleted" , Toast.LENGTH_SHORT).show()
+            }
+
+        }
     }
 }
