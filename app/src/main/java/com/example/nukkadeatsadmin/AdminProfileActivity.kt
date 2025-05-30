@@ -8,12 +8,23 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.nukkadeatsadmin.Modal.UserModal
 import com.example.nukkadeatsadmin.databinding.ActivityAdminProfileBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class AdminProfileActivity : AppCompatActivity() {
     private val binding : ActivityAdminProfileBinding by lazy {
         ActivityAdminProfileBinding.inflate(layoutInflater)
     }
+        private lateinit var auth : FirebaseAuth
+        private lateinit var database : FirebaseDatabase
+        private lateinit var adminreference : DatabaseReference
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -24,42 +35,84 @@ class AdminProfileActivity : AppCompatActivity() {
             insets
         }
 
+        auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
+        adminreference = database.reference.child("Admins")
+
         binding.backButton.setOnClickListener {
             finish()
         }
 
-        binding.nameEditText.isEnabled = false
-        binding.addressEditText.isEnabled = false
-        binding.emailEditText.isEnabled = false
-        binding.phoneEditText.isEnabled = false
-        binding.passwordEditText.isEnabled = false
+        binding.name.isEnabled = false
+        binding.address.isEnabled = false
+        binding.email.isEnabled = false
+        binding.phone.isEnabled = false
+        binding.password.isEnabled = false
         binding.imgRes.isEnabled = false
+        binding.saveInfoBtn.isEnabled = false
 
         var isEnable = false
         binding.editButton.setOnClickListener {
             isEnable = !isEnable
 
-            binding.nameEditText.isEnabled = isEnable
-            binding.addressEditText.isEnabled = isEnable
-            binding.emailEditText.isEnabled = isEnable
-            binding.phoneEditText.isEnabled = isEnable
-            binding.passwordEditText.isEnabled = isEnable
+            binding.name.isEnabled = isEnable
+            binding.address.isEnabled = isEnable
+            binding.email.isEnabled = isEnable
+            binding.phone.isEnabled = isEnable
+            binding.password.isEnabled = isEnable
             binding.imgRes.isEnabled = isEnable
 
 
             if(isEnable){
-                binding.nameEditText.requestFocus()
+                binding.name.requestFocus()
 
                 binding.imgRes.setOnClickListener{
                     pickImage.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
                 }
+                binding.saveInfoBtn.isEnabled = isEnable
             }
         }
 
         binding.saveInfoBtn.setOnClickListener {
-            Toast.makeText(this, "Information Saved" , Toast.LENGTH_SHORT).show()
+            updateAdminData()
             finish()
         }
+        retrieveAdminData()
+    }
+
+
+
+    private fun retrieveAdminData() {
+        val currentUserUid = auth.currentUser?.uid
+        if(currentUserUid != null){
+            adminreference = adminreference.child(currentUserUid)
+        }
+
+        adminreference.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    var adminName = snapshot.child("name").getValue()
+                    var email = snapshot.child("email").getValue()
+                    var address = snapshot.child("address").getValue()
+                    var phone = snapshot.child("phone").getValue()
+                    var password = snapshot.child("password").getValue()
+
+                    setDataTToTextView(adminName , email , address , phone , password)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        })
+    }
+
+    private fun setDataTToTextView(adminName: Any?, email: Any?, address: Any? , phone: Any? , password: Any?) {
+        binding.name.setText(adminName.toString())
+        binding.email.setText(email.toString())
+        binding.address.setText(address.toString())
+        binding.phone.setText(phone.toString())
+        binding.password.setText(password.toString())
     }
 
     var imageSelected = false
@@ -67,6 +120,25 @@ class AdminProfileActivity : AppCompatActivity() {
         if (uri != null) {
             binding.imgRes.setImageURI(uri)
             imageSelected = true
+        }
+    }
+
+    private fun updateAdminData() {
+        var updateName = binding.name.text.toString()
+        var updateEmail = binding.email.text.toString()
+        var updateAddress = binding.address.text.toString()
+        var updatePhone = binding.phone.text.toString()
+        var updatePassword = binding.password.text.toString()
+
+        var adminData = UserModal(updateName , updateAddress , null , updateEmail , updatePhone , updatePassword , null)
+        adminreference.setValue(adminData).addOnSuccessListener {
+
+            Toast.makeText(this , "Profile update failed" , Toast.LENGTH_SHORT).show()
+            auth.currentUser?.updateEmail(updateEmail)
+            auth.currentUser?.updatePassword(updatePassword)
+
+        }.addOnFailureListener {
+            Toast.makeText(this , "Profile update failed" , Toast.LENGTH_SHORT).show()
         }
     }
 }
