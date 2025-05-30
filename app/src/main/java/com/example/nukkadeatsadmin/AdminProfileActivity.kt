@@ -88,7 +88,7 @@ class AdminProfileActivity : AppCompatActivity() {
             adminreference = adminreference.child(currentUserUid)
         }
 
-        adminreference.addListenerForSingleValueEvent(object : ValueEventListener{
+        adminreference.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()){
                     var adminName = snapshot.child("name").getValue()
