@@ -130,6 +130,8 @@ class AdminProfileActivity : AppCompatActivity() {
         var updatePhone = binding.phone.text.toString()
         var updatePassword = binding.password.text.toString()
 
+
+
         var adminData = UserModal(updateName , updateAddress , null , updateEmail , updatePhone , updatePassword , null)
         adminreference.setValue(adminData).addOnSuccessListener {
 
@@ -140,5 +142,26 @@ class AdminProfileActivity : AppCompatActivity() {
         }.addOnFailureListener {
             Toast.makeText(this , "Profile update failed" , Toast.LENGTH_SHORT).show()
         }
+
+
+        //Different Method
+
+//        val currentAdminId = auth.currentUser?.uid
+//        if(currentAdminId != null){
+//            val adReference = adminreference.child(currentAdminId)
+//
+//            adReference.child("name").setValue(updateName)
+//            adReference.child("address").setValue(updateAddress)
+//            adReference.child("email").setValue(updateEmail)
+//            adReference.child("phone").setValue(updatePhone)
+//            adReference.child("password").setValue(updatePassword)
+//
+//            Toast.makeText(this , "Profile update failed" , Toast.LENGTH_SHORT).show()
+//            auth.currentUser?.updateEmail(updateEmail)
+//            auth.currentUser?.updatePassword(updatePassword)
+//
+//        }else{
+//            Toast.makeText(this , "Profile update failed" , Toast.LENGTH_SHORT).show()
+//        }
     }
 }

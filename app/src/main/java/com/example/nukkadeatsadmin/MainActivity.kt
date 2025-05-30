@@ -64,7 +64,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.logout.setOnClickListener {
-
+            auth.signOut()
+            startActivity(Intent(this , SignupActivity::class.java))
+            finish()
         }
 
 
