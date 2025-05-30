@@ -82,14 +82,14 @@
                     android:textSize="20sp" />
 
                 <EditText
-                    android:id="@+id/nameEditText"
+                    android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="49dp"
                     android:layout_weight="1"
                     android:background="@null"
                     android:gravity="start|center_vertical"
-                    android:hint="Badnam Munni" />
+                    android:hint="" />
 
             </LinearLayout>
 
@@ -99,6 +99,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="70dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="16dp"
@@ -124,14 +125,14 @@
                     android:textSize="20sp" />
 
                 <EditText
-                    android:id="@+id/addressEditText"
+                    android:id="@+id/address"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="40dp"
                     android:layout_weight="1"
                     android:background="@null"
                     android:gravity="start|center"
-                    android:hint="Munni bhavan prem nagar, dehradun, uttrakhand, India, Earth, Milky way Galaxy" />
+                    android:hint="" />
 
             </LinearLayout>
 
@@ -166,14 +167,14 @@
                     android:textSize="20sp" />
 
                 <EditText
-                    android:id="@+id/emailEditText"
+                    android:id="@+id/email"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="50dp"
                     android:layout_weight="1"
                     android:background="@null"
                     android:gravity="start|center_vertical"
-                    android:hint="munni.badnam@gmail.com"
+                    android:hint=""
 
                     android:inputType="textEmailAddress" />
 
@@ -210,14 +211,14 @@
                     android:textSize="20sp" />
 
                 <EditText
-                    android:id="@+id/phoneEditText"
+                    android:id="@+id/phone"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="45dp"
                     android:layout_weight="1"
                     android:background="@null"
                     android:gravity="start|center_vertical"
-                    android:hint="6969696969"
+                    android:hint=""
                     android:inputType="phone"
                     android:maxLength="10" />
 
@@ -254,14 +255,14 @@
                     android:textSize="20sp" />
 
                 <EditText
-                    android:id="@+id/passwordEditText"
+                    android:id="@+id/password"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="16dp"
                     android:layout_weight="1"
                     android:background="@null"
                     android:gravity="start|center_vertical"
-                    android:text="munnikamunna"
+                    android:text=""
                     android:inputType="textPassword" />
 
             </LinearLayout>

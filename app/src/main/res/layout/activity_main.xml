@@ -74,12 +74,13 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/pendingOrderCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/yeon_sung"
-                    android:text="30"
+                    android:text=""
                     android:textColor="#FF0000"
                     android:textSize="20sp" />
 
@@ -109,12 +110,13 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/completeOrder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/yeon_sung"
-                    android:text="30"
+                    android:text=""
                     android:textColor="#FF6835"
                     android:textSize="20sp" />
 
@@ -144,12 +146,13 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/totalEarning"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/yeon_sung"
-                    android:text="30"
+                    android:text=""
                     android:textColor="#08D108"
                     android:textSize="20sp" />
 
@@ -228,7 +231,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/yeon_sung"
-                android:text="Add All Items"
+                android:text="All Items"
                 android:textColor="#BB0C24"
                 android:textSize="20sp" />
 
