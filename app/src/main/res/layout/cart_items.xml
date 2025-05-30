@@ -60,51 +60,48 @@
                 app:layout_constraintStart_toEndOf="@+id/foodImage"
                 app:layout_constraintTop_toBottomOf="@+id/foodName" />
 
-            <ImageButton
-                android:id="@+id/minusCart"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="8dp"
-                android:background="@android:color/transparent"
-                app:layout_constraintBottom_toBottomOf="@+id/quantityCart"
-                app:layout_constraintEnd_toStartOf="@+id/quantityCart"
-                app:layout_constraintTop_toTopOf="@+id/quantityCart"
-                app:srcCompat="@drawable/icon_minus" />
+<!--            <ImageButton-->
+<!--                android:id="@+id/minusCart"-->
+<!--                android:layout_width="24dp"-->
+<!--                android:layout_height="24dp"-->
+<!--                android:layout_marginEnd="8dp"-->
+<!--                android:background="@android:color/transparent"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/quantityCart"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/quantityCart"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/quantityCart"-->
+<!--                app:srcCompat="@drawable/icon_minus" />-->
 
-            <ImageButton
-                android:id="@+id/plusCart"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="16dp"
-                android:background="@android:color/transparent"
-                app:layout_constraintBottom_toBottomOf="@+id/quantityCart"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/quantityCart"
-                app:layout_constraintVertical_bias="0.428"
-                app:srcCompat="@drawable/iconplus" />
+<!--            <ImageButton-->
+<!--                android:id="@+id/plusCart"-->
+<!--                android:layout_width="24dp"-->
+<!--                android:layout_height="24dp"-->
+<!--                android:layout_marginEnd="16dp"-->
+<!--                android:background="@android:color/transparent"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/quantityCart"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/quantityCart"-->
+<!--                app:layout_constraintVertical_bias="0.428"-->
+<!--                app:srcCompat="@drawable/iconplus" />-->
 
-            <TextView
-                android:id="@+id/quantityCart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:text="1"
-                app:layout_constraintEnd_toStartOf="@+id/plusCart"
-                app:layout_constraintTop_toTopOf="parent" />
+<!--            <TextView-->
+<!--                android:id="@+id/quantityCart"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:layout_marginEnd="8dp"-->
+<!--                android:text="1"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/plusCart"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
 
             <ImageButton
                 android:id="@+id/deleteCart"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
                 android:background="@android:color/transparent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/plusCart"
-                app:layout_constraintHorizontal_bias="0.527"
-                app:layout_constraintStart_toStartOf="@+id/minusCart"
-                app:layout_constraintTop_toBottomOf="@+id/quantityCart"
+                android:layout_marginRight="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/trashicon" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
