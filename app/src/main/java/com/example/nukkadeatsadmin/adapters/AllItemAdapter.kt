@@ -14,7 +14,9 @@ import com.google.firebase.database.DatabaseReference
 class AllItemAdapter(
     private val context: Context,
     private val menuList: ArrayList<AllMenu>,
-    databaseReference: DatabaseReference
+    databaseReference: DatabaseReference,
+
+    private val onDeleteClickListener : (position : Int) -> Unit
 
 ) : RecyclerView.Adapter<AllItemAdapter.viewHolder>() {
 
@@ -47,48 +49,48 @@ class AllItemAdapter(
                 Glide.with(context).load(uri).into(foodImage)
 
 
-                plusCart.setOnClickListener {
-                    increaseItem(position)
-                }
-
-                minusCart.setOnClickListener {
-                    decreaseItem(position)
-                }
+//                plusCart.setOnClickListener {
+//                    increaseItem(position)
+//                }
+//
+//                minusCart.setOnClickListener {
+//                    decreaseItem(position)
+//                }
 
                 deleteCart.setOnClickListener {
-                    deleteItem(position)
+                    onDeleteClickListener(position)
                 }
             }
         }
 
 
-        private fun decreaseItem(position: Int) {
-            if (itemQuantity[position] > 1) {
-                itemQuantity[position]--
-                binding.quantityCart.text = itemQuantity[position].toString()
-            }
-            if (itemQuantity[position] == 1) {
-                deleteItem(position)
-            }
-        }
+//        private fun decreaseItem(position: Int) {
+//            if (itemQuantity[position] > 1) {
+//                itemQuantity[position]--
+//                binding.quantityCart.text = itemQuantity[position].toString()
+//            }
+//            if (itemQuantity[position] == 1) {
+//                onDeleteClickListener(position)
+//            }
+//        }
 
-        private fun deleteItem(position: Int) {
-            menuList.removeAt(position)
-            menuList.removeAt(position)
-            menuList.removeAt(position)
-            notifyItemRemoved(position)
-            notifyItemRangeChanged(position, menuList.size)
-
-        }
-
-        private fun increaseItem(position: Int) {
-
-            if (itemQuantity[position] < 60) {
-                itemQuantity[position]++
-                binding.quantityCart.text = itemQuantity[position].toString()
-
-            }
-        }
+//        private fun deleteItem(position: Int) {
+//            menuList.removeAt(position)
+//            menuList.removeAt(position)
+//            menuList.removeAt(position)
+//            notifyItemRemoved(position)
+//            notifyItemRangeChanged(position, menuList.size)
+//
+//        }
+//
+//        private fun increaseItem(position: Int) {
+//
+//            if (itemQuantity[position] < 60) {
+//                itemQuantity[position]++
+//                binding.quantityCart.text = itemQuantity[position].toString()
+//
+//            }
+//        }
 
     }
 
