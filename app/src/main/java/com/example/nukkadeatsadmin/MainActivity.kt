@@ -34,6 +34,8 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        auth = FirebaseAuth.getInstance()
+
         binding.addMenu.setOnClickListener {
             startActivity(Intent(this, AddMenuActivity::class.java))
 
@@ -65,7 +67,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.logout.setOnClickListener {
             auth.signOut()
-            startActivity(Intent(this , SignupActivity::class.java))
+            startActivity(Intent(this , LoginActivity::class.java))
             finish()
         }
 
