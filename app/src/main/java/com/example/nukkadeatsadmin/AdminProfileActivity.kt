@@ -132,36 +132,36 @@ class AdminProfileActivity : AppCompatActivity() {
 
 
 
-        var adminData = UserModal(updateName , updateAddress , null , updateEmail , updatePhone , updatePassword , null)
-        adminReference.setValue(adminData).addOnSuccessListener {
-
-            Toast.makeText(this , "Profile update Successful" , Toast.LENGTH_SHORT).show()
-            auth.currentUser?.updateEmail(updateEmail)
-            auth.currentUser?.updatePassword(updatePassword)
-
-        }.addOnFailureListener {
-            Toast.makeText(this , "Profile update failed" , Toast.LENGTH_SHORT).show()
-        }
+//        var adminData = UserModal(updateName , updateAddress , null , updateEmail , updatePhone , updatePassword , null)
+//        adminReference.setValue(adminData).addOnSuccessListener {
+//
+//            Toast.makeText(this , "Profile update Successful" , Toast.LENGTH_SHORT).show()
+//            auth.currentUser?.updateEmail(updateEmail)
+//            auth.currentUser?.updatePassword(updatePassword)
+//
+//        }.addOnFailureListener {
+//            Toast.makeText(this , "Profile update failed" , Toast.LENGTH_SHORT).show()
+//        }
 
 
         //Different Method
 
-//        val currentAdminId = auth.currentUser?.uid
-//        if(currentAdminId != null){
-//            val adReference = adminReference.child(currentAdminId)
-//
-//            adReference.child("name").setValue(updateName)
-//            adReference.child("address").setValue(updateAddress)
-//            adReference.child("email").setValue(updateEmail)
-//            adReference.child("phone").setValue(updatePhone)
-//            adReference.child("password").setValue(updatePassword)
-//
-//            Toast.makeText(this , "Profile update failed" , Toast.LENGTH_SHORT).show()
-//            auth.currentUser?.updateEmail(updateEmail)
-//            auth.currentUser?.updatePassword(updatePassword)
-//
-//        }else{
-//            Toast.makeText(this , "Profile update failed" , Toast.LENGTH_SHORT).show()
-//        }
+        val currentAdminId = auth.currentUser?.uid
+        if(currentAdminId != null){
+            val adReference = adminReference.child(currentAdminId)
+
+            adReference.child("name").setValue(updateName)
+            adReference.child("address").setValue(updateAddress)
+            adReference.child("email").setValue(updateEmail)
+            adReference.child("phone").setValue(updatePhone)
+            adReference.child("password").setValue(updatePassword)
+
+            Toast.makeText(this , "Profile update failed" , Toast.LENGTH_SHORT).show()
+            auth.currentUser?.updateEmail(updateEmail)
+            auth.currentUser?.updatePassword(updatePassword)
+
+        }else{
+            Toast.makeText(this , "Profile update failed" , Toast.LENGTH_SHORT).show()
+        }
     }
 }
