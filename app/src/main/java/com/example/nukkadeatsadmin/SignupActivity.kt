@@ -251,11 +251,11 @@ class SignupActivity : AppCompatActivity() {
         email = binding.editTextTextEmailAddress.text.toString().trim()
         password = binding.editTextTextPassword.text.toString().trim()
 
-        val userData = UserModal(username, restaurantName, email, password)
+        val userData = UserModal(username, null , restaurantName, email, null , password)
         val userId = FirebaseAuth.getInstance().currentUser!!.uid
 
         userId?.let {
-            database.child("users").child(it).setValue(userData)
+            database.child("Admins").child(it).setValue(userData)
 
         }
     }
